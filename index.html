@@ -105,7 +105,7 @@ p b {
 
     <h2>Introduction</h2>
 
-    <p>Welcome to this guide to Eiffel syntax. It is designed to be a basic reference to help beginners get acquainted with the language. This should not be seen as a course or tutorial. Please help improve and maintain this page through <a href="http://github.com/">GitHub</a>. To get started, let's have a look at this simple hello world:</p>
+    <p>Welcome to this guide about the Eiffel programming language. It is designed to be a basic reference to help beginners get acquainted with the language. This should not be seen as a course or tutorial. Please help improve and maintain this page through <a href="https://github.com/carlfriess/eiffel-guide/">GitHub</a>. To get started, let's have a look at this simple hello world:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 class
@@ -122,8 +122,6 @@ feature
 
 end
     </code></pre></div>
-
-
     <div class="output"><pre><code>Hello World!</code></pre></div>
 
 
@@ -231,6 +229,21 @@ end
 
 
 
+    <h2>Some basic I/O</h2>
+
+    <p>These are some examples of basic input/output functions, that can be used to interact with a user at a command line level:</p>
+
+    <p><b>Io.put_string ("Hello World!")</b> Prints out a string</p>
+    <p><b>Io.put_integer (42)</b> Prints out an integer</p>
+    <p><b>Io.put_real (9.99)</b> Prints out a real</p>
+    <p><b>Io.put_boolean (true)</b> Prints out a true or false</p>
+    <p><b>Io.new_line</b> Prints out a new line</p>
+
+    <p><b>Io.read_line</b> Reads in one line of users input and stores it in <b>Io.last_string</b></p>
+    <p><b>Io.read_integer</b> Reads in an integer from users input and stores it in <b>Io.last_integer</b></p>
+
+
+
     <h2>Operators</h2>
 
     <p><b>:=</b> Assignment operator. Ex: <b>meaning_of_life := 42</b></p>
@@ -242,10 +255,46 @@ end
 
 
 
+    <h2>If-Else Control Structure</h2>
+
+    <p>In Eiffel the syntax for an if else loop is as follows (notice, there are no brackets):</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+if meaning_of_life = 42
+then
+    -- code if true
+else
+    -- code if false
+end
+
+    </code></pre></div>
+
+
+
+    <h2>For-Loop</h2>
+
+    <p>This is the typical syntax for a simplified for loop:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+from
+    i := 0
+until
+    i >= 10
+loop
+    -- do something
+    i := i + 1
+end
+
+    </code></pre></div>
+
+
+
 
     <div class="divider" style="margin-top: 150px;"></div>
 
-    <div class="footer">Created by <a href="http://carlfriess.com/">Carl Friess</a> in 2015. <a href="http://github.com/">GitHub Repo</a></div>
+    <div class="footer">Created by <a href="http://carlfriess.com/">Carl Friess</a> in 2015. <a href="https://github.com/carlfriess/eiffel-guide/">GitHub Repo</a></div>
 
     <script type="text/javascript">Array.prototype.slice.call(document.getElementsByTagName("code")).forEach(function(i){i.innerHTML=i.innerHTML.replace(/^\s+|\s+$/g,'');});</script>
     <script type="text/javascript" src="prism.js"></script>
