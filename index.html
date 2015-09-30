@@ -1,0 +1,254 @@
+<html>
+<head>
+
+    <title>Eiffel Syntax Guide</title>
+
+    <link rel="stylesheet" type="text/css" href="Anders-font/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:100|Open+Sans:300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="prism.css">
+
+    <style type="text/css">
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #263238;
+}
+
+h1 {
+    font-family: "Anders";
+    text-align: center;
+    color:#E0E0E0;
+    margin: 150px auto;
+}
+
+.divider {
+    margin: 50px auto;
+    width: 250px;
+    border-bottom: dashed #37474F 1px;
+}
+
+a {
+    color: #2196F3;
+}
+
+h2 {
+    display: block;
+    margin: 75px auto;
+    margin-bottom: 25px;
+    width: 900px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+    font-size: 36px;
+    color: #E0E0E0;
+}
+
+.code, .output {
+    width: 850px;
+    margin: 25px auto;
+    display: block;
+}
+
+.output {
+    margin-top: -20px;
+}
+
+.output pre {
+    background: #272822;
+    color: #f8f8f2;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    padding: 1em;    
+    border-radius: 0.3em;
+    font-size: 16px;
+}
+
+p {
+    display: block;
+    width: 800px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #FFF;
+    margin: 25px auto;
+    line-height: 1.25
+}
+
+p b {
+    display: inline-block;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-weight: 400;
+    background-color: #37474F;
+    padding: 1px 2px;
+    border-radius: 4px;
+}
+
+
+.footer {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    color: #E0E0E0;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+    </style>
+
+</head>
+<body>
+
+    <h1>A comprehensive guide to Eiffel syntax</h1>
+
+    <div class="divider"></div>
+
+
+
+    <h2>Introduction</h2>
+
+    <p>Welcome to this guide to Eiffel syntax. It is designed to be a basic reference to help beginners get acquainted with the language. This should not be seen as a course or tutorial. Please help improve and maintain this page through <a href="http://github.com/">GitHub</a>. To get started, let's have a look at this simple hello world:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+class
+    HELLO_WORLD
+
+create
+    say_it
+
+feature
+    say_it
+        do
+            Io.put_string ("Hello World!")
+        end
+
+end
+    </code></pre></div>
+
+
+    <div class="output"><pre><code>Hello World!</code></pre></div>
+
+
+
+    <h2>Some basics</h2>
+
+    <p>The first difference you will notice in Eiffel compared to other languages like C++ or Java is the absence of curly brackets to separate code blocks. Instead in Eiffel we use keywords followed by <b>end</b>. We also do not terminate lines of code with a semi-colon. Features (functions) can be called without using brackets, if they do not accept any arguments (Ex: <b>target.my_function</b> instead of <b>target.my_function()</b>).
+
+
+
+    <h2>Naming_conventions</h2>
+
+    <p>In general in Eiffel we use <b>snake_script</b> and not <b>CamelCase</b>.</p>
+
+    <p><b>CLASSES</b> should be spelled in capital letters.</p>
+    <p><b>features</b> (methods and attributes of classes) should be spelled small.</p>
+    <p><b>Objects</b> (instances of a class) should be capitalised.</p>
+    
+
+
+    <h2>Features</h2>
+
+    <p>In Eiffel the Methods and Attributes (Variables) of a class are called features. We can define them by using the key word <b>feature</b> followed by the features name within a class. We specify the features type or return type by using a colon followed by the types name. If a feature is a function and takes arguments we can list them in brackets together with their types. The keyword <b>do</b> is used to denote where the code of the function starts, followed by <b>end</b> at the end.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    BAKERY
+
+feature
+    
+    number_of_cakes : INTEGER
+        -- A variable containing an integer
+
+    name_of_my_favourite_cake : STRING
+        -- A variable containing a string
+
+    price_of_one_cake : REAL = 19.99
+        -- A variable containing a floating point number with a predefined value
+
+    buy_cake (price : REAL, flavour : STRING)   -- A function accepting arguments
+        do
+            -- Some code here...
+        end
+
+    is_cake_available : BOOLEAN   -- A function returning true or false 
+        do
+            Result := number_of_cakes > 0
+        end
+
+end
+
+    </code></pre></div>
+
+    <p>The return value of a feature is set by assigning it to the <b>Result</b> variable. However, similar to other languages, a <b>return</b> statement can be used to finish execution of a feature.   </b>
+
+    <p>Features may also use local variables which are internal to the function. However, they must be declared with their type before the <b>do</b> keyword using the <b>local</b> keyword. For example:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    MY_CLASS
+feature
+    my_feature
+        local
+            my_variable_1 : INTEGER
+            my_variable_2 : STRING
+        do
+            -- Some code here...
+        end
+end
+
+    </code></pre></div>
+
+
+
+    <h2>Creating a Class</h2>
+
+    <p>By now you will probably have noticed how to define a class. However, now we will cover some more details: When defining a class, one should specify a feature, which will be called when creating an Object using that class this is done with the <b>create</b> keyword. See the "Hello World!" example at the beginning: The <b>say_it</b> feature is specified under create. This will be the root procedure that we tell the compiler to execute first.</p>
+
+
+
+    <h2>Creating an Object</h2>
+
+    <p>To create an Object we first need to define it and it's type. This could be done as a local variable within a feature. Then we can use the <b>create</b> keyword to create the instance of the class and initialise it. A class that utilises the "Hello World!" example might look like this:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    MY_CLASS
+create
+    my_feature
+feature
+    my_feature
+        local
+            My_hello_world : HELLO_WORLD
+        do
+            create My_hello_world.say_it
+        end
+end
+
+    </code></pre></div>
+
+    <p>The above code first defines the object <b>My_hello_world</b> to be of the type <b>HELLO_WORLD</b>. Then we create the instance of the class by calling <b>create My_hello_world.say_it</b>. At the same time we are calling <b>HELLO_WORLD</b>'s feature <b>say_it</b>.</p>
+
+
+
+    <h2>Operators</h2>
+
+    <p><b>:=</b> Assignment operator. Ex: <b>meaning_of_life := 42</b></p>
+    <p><b>=</b> Equality operator (== in many other languages). Ex: <b>1 + 2 = 3</b></p>
+    <p><b>/=</b> Inequality operator (!= in many other languages). Ex: <b>meaning_of_life /= 42</b></p>
+    <p><b>&lt;</b>, <b>&gt;</b>, <b>&lt;=</b>, <b>&gt;=</b> Comparison operators.</p>
+    <p><b>+</b>, <b>-</b>, <b>*</b>, <b>/</b> Mathematical operators.</p>
+    <p><b>equal (x, y)</b> To compare strings we must use the equal function.</p>
+
+
+
+
+    <div class="divider" style="margin-top: 150px;"></div>
+
+    <div class="footer">Created by <a href="http://carlfriess.com/">Carl Friess</a> in 2015. <a href="http://github.com/">GitHub Repo</a></div>
+
+    <script type="text/javascript">Array.prototype.slice.call(document.getElementsByTagName("code")).forEach(function(i){i.innerHTML=i.innerHTML.replace(/^\s+|\s+$/g,'');});</script>
+    <script type="text/javascript" src="prism.js"></script>
+
+</body>
+</html>
