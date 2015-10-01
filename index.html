@@ -291,6 +291,33 @@ end
 
 
 
+    <h2>Contracts</h2>
+
+    <p>Contracts are a concept in Eiffel to avoid bugs. Although these should be disabled in a production runtime, during development they can be quite useful. There are three types of assurance elements: preconditions (used in features), postconditions (used in features) and class invariants.</p>
+
+    <p>Preconditions are defined using the <b>require</b> keyword. They should contain a tag and a boolean expression. Postconditions are written the same way, but we use the <b>ensure</b> keyword. We can use the <b>old</b> notation to compare a variables value to it's value before the feature executed. Here is an example that might be used in the <b>BAKERY</b> class we saw above:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+number_of_available_cakes : INTEGER
+
+buy_cake (amount : INTEGER)
+
+    require
+        positive: amount > 0    -- Check that amount is a positive number
+
+    do
+        number_of_available_cakes = number_of_available_cakes - amount
+
+    ensure
+        reduced: number_of_available_cakes = old number_of_available_cakes - amount
+            -- Check that the number of available cakes has decreased correctly
+
+    end
+
+    </code></pre></div>
+
+
 
     <div class="divider" style="margin-top: 150px;"></div>
 
