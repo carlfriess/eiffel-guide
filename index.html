@@ -317,6 +317,27 @@ buy_cake (amount : INTEGER)
 
     </code></pre></div>
 
+    <p>Class invariants are checked every time an operation is performed on the class, such as calling a feature. We declare class invariants using the <b>invariant</b> keyword. In this example we will check that a variable is always positive:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    MY_CLASS
+
+feature
+    some_number : INTEGER
+    some_feature
+        do
+            -- Some code here...
+        end
+
+invariant
+    positive: some_number > 0
+
+end
+
+    </code></pre></div>
+
 
 
     <div class="divider" style="margin-top: 150px;"></div>
