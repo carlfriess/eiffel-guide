@@ -202,6 +202,25 @@ end
 
     <p>By now you will probably have noticed how to define a class. However, now we will cover some more details: When defining a class, one should specify a feature, which will be called when creating an Object using that class this is done with the <b>create</b> keyword. See the "Hello World!" example at the beginning: The <b>say_it</b> feature is specified under create. This will be the root procedure that we tell the compiler to execute first.</p>
 
+    <p>Classes may also inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified that should be redefined in this class.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    MY_CLASS
+
+inherit
+    SOME_OTHER_CLASS
+        redefine
+            some_inherited_feature
+
+feature
+    some_inherited_feature
+
+[...]
+
+    </code></pre></div>
+
 
 
     <h2>Creating an Object</h2>
