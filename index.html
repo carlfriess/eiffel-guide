@@ -20,6 +20,7 @@ h1 {
     text-align: center;
     color:#E0E0E0;
     margin: 150px auto;
+    text-shadow: 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .divider {
@@ -41,6 +42,7 @@ h2 {
     font-weight: 100;
     font-size: 36px;
     color: #E0E0E0;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 }
 
 .code, .output {
@@ -69,7 +71,8 @@ p {
     font-weight: 300;
     color: #FFF;
     margin: 25px auto;
-    line-height: 1.25
+    line-height: 1.25;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 }
 
 p b {
@@ -79,6 +82,7 @@ p b {
     background-color: #37474F;
     padding: 1px 2px;
     border-radius: 4px;
+    text-shadow: none;
 }
 
 
@@ -90,6 +94,7 @@ p b {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 }
 
     </style>
@@ -105,7 +110,7 @@ p b {
 
     <h2>Introduction</h2>
 
-    <p>Welcome to this guide about the Eiffel programming language. It is designed to be a basic reference to help beginners get acquainted with the language. This should not be seen as a course or tutorial. Please help improve and maintain this page through <a href="https://github.com/carlfriess/eiffel-guide/">GitHub</a>. To get started, let's have a look at this simple hello world:</p>
+    <p>Welcome to this guide about the Eiffel programming language. It is designed to be a basic reference to help beginners get acquainted with the language. Some knowledge of other programming languages might be considered very useful. This should not be seen as a course or tutorial. Please help improve and maintain this page through <a href="https://github.com/carlfriess/eiffel-guide/">GitHub</a>. To get started, let's have a look at this simple hello world:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 class
@@ -198,11 +203,9 @@ end
 
 
 
-    <h2>Creating a Class</h2>
+    <h2>Classes</h2>
 
-    <p>By now you will probably have noticed how to define a class. However, now we will cover some more details: When defining a class, one should specify a feature, which will be called when creating an Object using that class this is done with the <b>create</b> keyword. See the "Hello World!" example at the beginning: The <b>say_it</b> feature is specified under create. This will be the root procedure that we tell the compiler to execute first.</p>
-
-    <p>Classes may also inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified that should be redefined in this class.</p>
+    <p>The simplest way to define a class in Eiffel is just to name it and give it some features. It may even inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified that should be redefined in this class and not inherited.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -219,13 +222,42 @@ feature
 
 [...]
 
+end
+
+    </code></pre></div>
+
+    <p>In this case when we want to create an instance of the class, we need to first define the object and specify it's type. Then we use the <b>create</b> keyword to initialise the object, before making other calls to it.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+feature
+    example
+        local
+            New_object: SOME_CLASS
+        do
+            create New_object
+            New_object.some_feature
+        end
+
     </code></pre></div>
 
 
 
-    <h2>Creating an Object</h2>
+    <h2>Reference vs. Expanded Classes</h2>
 
-    <p>To create an Object we first need to define it and it's type. This could be done as a local variable within a feature. Then we can use the <b>create</b> keyword to create the instance of the class and initialise it. A class that utilises the "Hello World!" example might look like this:</p>
+    <p>In Eiffel there is a key differentiation between reference and expanded classes. By default a class is of the reference type. To declare a class as expanded, we use the <b>expanded</b> keyword before <b>class</b>.</p>
+
+    <p>As the name would suggest a reference class sets itself apart in that it's attributes are references to other objects, either of classes defined by the developer or built-in classes such as <b>STRING</b> or <b>REAL</b>. As such, an object of a the reference type does not contain any actual values apart from addresses. It only contains references to where the values are stored in the memory. In C or C++ references would be referred to as pointers. An expanded class on the other hand does not contain references, but the actual values. This key difference has an effect on how we create and use classes.</p>
+
+
+
+    <h2>Reference Classes</h2>
+
+    <p>When we define an object of a certain class, the computer will allocate memory to hold that class's attributes. However, in the case of a reference class, this allocated memory will only hold the references or addresses to the objects containing the actual values. So by default all attributes of a class will be set to <b>Void</b>, as the objects that the class refers to, do not exist yet. To create these we must always call <b>create</b> before using a new instance.</p>
+
+    <p>It is possible to test if an object <b>x</b> has been initialised yet by using the expression <b>x = Void</b>.</p>
+
+    <p>It is good style to use constructors to initialise attributes to the correct values and ensure that any class invariants are fulfilled. To enforce the use of constructors, we can specify features as possible constructors using the <b>create</b> keyword like so:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -234,17 +266,61 @@ class
 create
     my_feature
 feature
-    my_feature
-        local
-            My_hello_world : HELLO_WORLD
+    my_feature (some_argument : STRING)
         do
-            create My_hello_world.say_it
+            -- Do something here...
         end
 end
 
     </code></pre></div>
 
-    <p>The above code first defines the object <b>My_hello_world</b> to be of the type <b>HELLO_WORLD</b>. Then we create the instance of the class by calling <b>create My_hello_world.say_it</b>. At the same time we are calling <b>HELLO_WORLD</b>'s feature <b>say_it</b>.</p>
+    <p>An instance <b>my_object</b> of the class would then be initialised like so:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+create my_object.my_feature("Hello World!")
+
+    </code></pre></div>
+
+    <p>You may specify as many constructors as you want. However, as soon as at least one constructor has been specified, a constructor must be used when creating a new instance. If no constructors are specified, then simply creating an object without adding a constructor  will invoke <b>default_create</b>, which is a feature that is automatically added to every class without constructors and by default does nothing.</p>
+
+
+
+    <h2>Expanded Classes</h2>
+
+    <p>Expanded classes differ from reference classes in that they do not contain references, but rather the actual values of their attributes. For this reason, we do not need to call <b>create</b> before using objects that are instances of the class. All attributes are automatically set to their default initial values when the object is defined.</p>
+
+    <p>If <b>a</b> and <b>b</b> are both instances of an expanded class, <b>a = b</b> will copy all of <b>b</b> (including it's values) into <b>a</b> and create a new instance with the same values.</p>
+
+    <p>On the other hand, if <b>a</b> and <b>b</b> are both instances of a reference class, then <b>a = b</b> will copy the reference to the instance of the class represented by <b>b</b> into <b>a</b>. In other words, now <b>a</b> and <b>b</b> will reference the same instance and any change to <b>a</b> will be reflected in <b>b</b>.</p>
+
+
+
+    <h2>Exporting features</h2>
+
+    <p>By default all features defined in a class will be available to clients of the class. To prevent this, we can use <b>{NONE}</b> to keep features internal and inaccessible to clients. This is similar to using private in Java for instance.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    MY_CLASS
+
+feature
+    a_feature    -- This method will be exported
+        do
+            -- Code here...
+        end
+
+feature {NONE}
+    another_feature    -- This feature will remain internal to the class
+        do
+            -- Code here...
+        end
+
+end
+
+    </code></pre></div>
+
 
 
 
@@ -270,7 +346,8 @@ end
     <p><b>/=</b> Inequality operator (!= in many other languages). Ex: <b>meaning_of_life /= 42</b></p>
     <p><b>&lt;</b>, <b>&gt;</b>, <b>&lt;=</b>, <b>&gt;=</b> Comparison operators.</p>
     <p><b>+</b>, <b>-</b>, <b>*</b>, <b>/</b> Mathematical operators.</p>
-    <p><b>equal (x, y)</b> To compare strings we must use the equal function.</p>
+    <p><b>equal (x, y)</b> To compare strings we can use the equal function.</p>
+    <p><b>Current</b> Though not an operator, this always references the currently executing instance of a class.</p>
 
 
 
@@ -356,6 +433,12 @@ invariant
 end
 
     </code></pre></div>
+
+
+
+    <h2>Garbage collection</h2>
+
+    <p>Eiffel uses a garbage collector, which automatically removes any objects from the memory, which are no longer referenced to. So unlike in C or C++ for instance, it is not necessary to perform frees.</p>
 
 
 
