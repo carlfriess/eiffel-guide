@@ -367,6 +367,23 @@ else
 end
 
     </code></pre></div>
+    
+    <p>Eiffel also provides Switch-Statements, where a variable is compared to various values. The else condition is the default condition that applies when no case matches the input.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+inspect input_integer
+   when 2 then 
+        -- Code when input_integer equals 2
+   when 3, 5 then 
+        -- Code when input_integer equals 3 or 5
+   else 
+        -- Code when input_integer does not equal 2, 3, nor 5
+end
+    
+    </code></pre></div>
+    
+    <p>Keep in my that the code does not break out of the switch-conditional after executing a single case statement, but rather continues executing all remaining cases too! </p>
 
 
 
@@ -383,6 +400,20 @@ until
 loop
     -- do something
     i := i + 1
+end
+
+    </code></pre></div>
+    
+    <p>There also exists an "across"-loop, which goes through an iterable object (such as a list), and binds the current object to a variable. </p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+across 
+    list_of_customers
+as
+    customer
+loop
+    -- do something (with customer)
 end
 
     </code></pre></div>
