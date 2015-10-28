@@ -372,12 +372,13 @@ end
 
     <div class="code"><pre><code class="language-eiffel">
 
-inspect var
-   when case1 then 
-        -- Code when case1 equals var
-   when case2, case3 then 
-        -- Code when case2 or case3 equals var
-   else statement_else
+inspect input_integer
+   when 2 then 
+        -- Code when input_integer equals 2
+   when 3, 5 then 
+        -- Code when input_integer equals 3 or 5
+   else 
+        -- Code when input_integer does not equal 2, 3, nor 5
 end
     
     </code></pre></div>
@@ -408,12 +409,11 @@ end
     <div class="code"><pre><code class="language-eiffel">
 
 across 
-    iterable_object
+    list_of_customers
 as
-    element_of_object
+    customer
 loop
-    -- do something (with element_of_object)
-    -- you don't have to increment the element_of_object, this is done automatically
+    -- do something (with customer)
 end
 
     </code></pre></div>
