@@ -203,6 +203,28 @@ end
 
 
 
+    <h2>Assigners</h2>
+
+    <p>The variables of a class are read-only to it's clients. To change their values, we can use a setter like a feature that takes the new value as an argument like <b>set_age</b> below:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    PERSON
+feature
+    age: INTEGER
+    set_age ( new_age: INTEGER )
+        do
+            age := new_age
+        end
+end
+
+    </code></pre></div>
+
+    <p>So a client of the class would not be able to change the age by using <b>Person.age := 21</b>, as <b>Person.age</b> is read-only for clients. Instead it would call <b>Person.set_age(21)</b>.</p>
+
+
+
     <h2>Classes</h2>
 
     <p>The simplest way to define a class in Eiffel is just to name it and give it some features. It may even inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified that should be redefined in this class and not inherited.</p>
@@ -387,7 +409,7 @@ end
 
 
 
-    <h2>For-Loop</h2>
+    <h2>Form-Loop</h2>
 
     <p>This is the typical syntax for a simplified for loop:</p>
 
@@ -399,6 +421,25 @@ until
     i >= 10
 loop
     -- do something
+    i := i + 1
+end
+
+    </code></pre></div>
+
+    <p>It is also possible to add contracts to a from loop. The two options here are to specify a <b>variant</b> expression and an <b>invariant</b> expression. The variant must decrease by 1 after each cycle of the loop, while the variant remains the same. Here is an example:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+from
+    i := 0
+    n := 10
+until
+    i >= 10
+variant
+    n-i
+invariant
+    n
+loop
     i := i + 1
 end
 
