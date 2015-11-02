@@ -221,7 +221,23 @@ end
 
     </code></pre></div>
 
-    <p>So a client of the class would not be able to change the age by using <b>Person.age := 21</b>, as <b>Person.age</b> is read-only for clients. Instead it would call <b>Person.set_age(21)</b>.</p>
+    <p>So a client of the class would not be able to change the age by using <b>Person.age := 21</b>, as <b>Person.age</b> is read-only for clients. Instead it would call <b>Person.set_age(21)</b>. However, if for some reason you're thinking YOLO, I want to use <b>Person.age := 21</b>, you can give age a so called assigner by using the <b>assign</b> keyword and specifying a setter.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    PERSON
+feature
+    age: INTEGER assign set_age
+    set_age ( new_age: INTEGER )
+        do
+            age := new_age
+        end
+end
+
+    </code></pre></div>
+
+    <p>Now <b>Person.age := 21</b> is simply a shortcut for <b>Person.set_age(21)</b>.</p>
 
 
 
