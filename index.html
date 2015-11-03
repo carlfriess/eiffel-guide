@@ -256,6 +256,10 @@ inherit
             some_inherited_feature
 
 feature
+    some_feature
+        do
+            [...]
+        end
     some_inherited_feature
 
 [...]
@@ -264,22 +268,22 @@ end
 
     </code></pre></div>
 
-    <p>In this case when we want to create an instance of the class, we need to first define the object and specify it's type. Then we use the <b>create</b> keyword to initialise the object, before making other calls to it.</p>
+    <p>When redefining a feature, it can be helpful to call it's old version, so within the redefinition, the keyword <b>Precursor</b> is set to the old version and calls can be made like this: <b>Precursor("Some argument")</b>. If you would like to use a version from a specific parent, you can add curly brackets: <b>Precursor { SOME_PARENT } ("Some argument")</b></p>
+
+    <p>In the case of <b>MY_CLASS</b> when we want to create an instance of the class, we need to first define the object and specify it's type. Then we use the <b>create</b> keyword to initialise the object, before making other calls to it. A client of the class might look like this:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
 feature
     example
         local
-            New_object: SOME_CLASS
+            New_object: MY_CLASS
         do
             create New_object
             New_object.some_feature
         end
 
     </code></pre></div>
-
-    <p>When redefining a feature, it can be helpful to call it's old version, so within the redefinition, the keyword <b>Precursor</b> is set to the old version and calls can be made like this: <b>Precursor("Some argument")</b>. If you would like to use a version from a specific parent, you can add curly brackets: <b>Precursor { SOME_PARENT } ("Some argument")</b></p>
 
 
 
