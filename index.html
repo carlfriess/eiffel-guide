@@ -431,7 +431,7 @@ end
 
     </code></pre></div>
     
-    <p>Eiffel also provides Switch-Statements, where a variable is compared to various values. The else condition is the default condition that applies when no case matches the input.</p>
+    <p>Eiffel also provides switch-like Statements called <b>inspect</b>, where a variable is compared to various values. The else condition is the default condition that applies when no case matches the input.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -446,7 +446,7 @@ end
     
     </code></pre></div>
     
-    <p>Keep in my that the code does not break out of the switch-conditional after executing a single case statement, but rather continues executing all remaining cases too! </p>
+    <p>Unlike switch statements in other languages, in Eiffel the code following a matching case is not evaluated, as there is no break statement in Eiffel.</p>
 
 
 
