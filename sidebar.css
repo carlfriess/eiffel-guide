@@ -1,0 +1,51 @@
+/* CSS for the sidebar */
+
+#sidebar {
+    position: fixed;
+    display: table;
+    top: 0;
+    left: 0;
+    padding-right: 25px;
+    height: 100%;
+}
+
+#sidebar > div {
+    background-color: rgba(38, 50, 56, 0);
+    height: 100%;
+
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+
+#sidebar:hover > div {
+    background-color: rgba(38, 50, 56, 1);
+}
+
+#sidebar a {
+    display: block;
+    width: 200px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #E0E0E0;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    padding: 5px 10px;
+    padding-right: 15px;
+    margin-left: -210px;
+
+    -webkit-transition: margin-left 0.25s;
+    transition: margin-left 0.25s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+}
+#sidebar:hover a {
+    margin-left: 0px;
+}
+
+#sidebar a:first-child, #sidebar a:hover, #sidebar a.highlighted {
+    border-right: solid 3px #66d9ef;
+    background-color: rgba(255, 255, 255, 0.1);
+}

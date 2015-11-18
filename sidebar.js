@@ -1,7 +1,7 @@
 angular.module('sidebar', [])
-.controller('SidebarController', ["$anchorScroll", function($anchorScroll){
+.controller('SidebarController', ["$window", function($window){
     this.scrollTo = function (index) {
-        window.scrollTo(0, document.getElementsByTagName("h2").item(index).offsetTop);
+        $window.scrollTo(0, document.getElementsByTagName("h2").item(index).offsetTop - 25);
     };
 }])
 .directive('sidebar', function() {
@@ -9,14 +9,14 @@ angular.module('sidebar', [])
         restrict : 'E',
         template: function(elem, attr){
 
-            var html = "<div id=\"sidebar\" ng-controller=\"SidebarController as sidebarCtrl\" style=\"position: fixed; top: 0; left: 0;\">",
+            var html = "<div id=\"sidebar\" ng-controller=\"SidebarController as sidebarCtrl\"><div>",
                 h2 = document.getElementsByTagName("h2");
 
             for (var i = 0; i < h2.length; i++) {
-                html += "<a href=\"\" ng-click=\"sidebarCtrl.scrollTo(" + i + ")\">" + h2.item(i).innerText + "</a><br/>";
+                html += "<a href=\"\" ng-click=\"sidebarCtrl.scrollTo(" + i + ")\">" + h2.item(i).innerText + "</a>";
             }
 
-            html += "</div>";
+            html += "</div></div>";
 
             return html;
 
