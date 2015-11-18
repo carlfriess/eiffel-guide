@@ -167,7 +167,7 @@ feature
     price_of_one_cake : REAL
         -- A variable containing a floating point number
 
-    buy_cake (price : REAL, flavour : STRING)   -- A function accepting arguments
+    buy_cake (price : REAL; flavour : STRING)   -- A function accepting arguments
         do
             -- Some code here...
         end
@@ -181,7 +181,9 @@ end
 
     </code></pre></div>
 
-    <p>The return value of a feature is set by assigning it to the <b>Result</b> variable. However, similar to other languages, a <b>return</b> statement can be used to finish execution of a feature.   </b>
+    <p>The return value of a feature is set by assigning it to the <b>Result</b> variable. Unlike other languages, the return statement does not exist.</b>
+
+    <p>Also notice, that when defining a feature, arguments are separated using semi-colons. However, when calling the feature, they are separated by means of a comma.</p>
 
     <p>Features may also use local variables which are internal to the function. However, they must be declared with their type before the <b>do</b> keyword using the <b>local</b> keyword. For example:</p>
 
