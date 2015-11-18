@@ -45,7 +45,10 @@
     margin-left: 0px;
 }
 
-#sidebar a:first-child, #sidebar a:hover, #sidebar a.highlighted {
+#sidebar a:first-child,#sidebar a.highlighted {
     border-right: solid 3px #66d9ef;
     background-color: rgba(255, 255, 255, 0.1);
+}
+#sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
