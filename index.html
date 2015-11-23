@@ -356,7 +356,79 @@ end
 
     </code></pre></div>
 
-    <p>If we now had an instance of the class called <b>Joe</b> with the age 36 and another called <b>Tom</b> with the age 24, then <b>Joe > Tom</b> is true, while <b>Tom > Joe</b> is false.
+    <p>If we now had an instance of the class called <b>Joe</b> with the age 36 and another called <b>Tom</b> with the age 24, then <b>Joe > Tom</b> is true, while <b>Tom > Joe</b> is false.</p>
+
+
+
+    <h2>Multiple Inheritance</h2>
+
+    <p>We have already seen, that classes can inherit features from other classes and redefine them to change their behaviour. We have also seen that classes may defer features to be implemented in a child class. However, when inheriting from multiple classes we run into another problem: clashes.</p>
+
+    <p>If a class <b>C</b> inherits from two classes <b>A</b> and <b>B</b>, which both have a feature called <b>f</b> then we will need to rename or undefine the feature for at least one of the two classes. For this we can use the <b>rename</b> and <b>undefine</b> keywords similarly to <b>redefine</b>. Consider the following implementation of the before mentioned problem:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    A
+
+feature
+    f
+        do
+            -- Some code...
+        end
+    g
+        do
+            -- Some code...
+        end
+
+end
+
+    </code></pre></div>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    B
+
+feature
+    f
+        do
+            -- Some different code...
+        end
+    g
+        do
+            -- Some different code...
+        end
+
+end
+
+    </code></pre></div>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    C
+
+inherit
+    A
+        rename
+            f as A_f    -- The feature f inherited from A is now called A_f within C
+
+    B
+        undefine
+            g           -- The feature g inherited from B is no longer part of C
+
+feature
+    
+    ...
+
+end
+
+    </code></pre></div>
+
+    <p>In the above example, the feature <b>f</b> inherited from <b>B</b> is still called <b>f</b> in <b>C</b>, the same goes for the feature <b>g</b> inherited from <b>A</b>. So in conclusion, the class <b>C</b> now has the features <b>A_f</b> (inherited from A), <b>f</b> (inherited from B) and <b>g</b> (inherited from A).</p>
+
+    <p>If the classes <b>A</b> and <b>B</b> were inheriting the features <b>f</b> and <b>g</b> from the same class instead of defining them themselves, then in fact there is no need to undefine or rename any of the features, as there is only one effective implementation for them.
 
 
 
@@ -462,7 +534,7 @@ end
 
     </code></pre></div>
     
-    <p>There also exists an "across"-loop, which goes through an iterable object (such as a list), and binds the current object to a variable. </p>
+    <p>There also exists an "across"-loop, which goes through an iterable object (such as a list), and creates a cursor. Make sure that the object is in fact iterable. For this all elements must have a feature called <b>next</b> and the iterated object should have the features <b>first</b> and <b>last</b>. The cursor points to the next element of the iterated object at each execution of the loop. Since it is a cursor, you must access the actual elements by using <b>my_cursor.item</b>.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -471,7 +543,8 @@ across
 as
     customer
 loop
-    -- do something (with customer)
+    Io.put_string (customer.item.name)
+    Io.new_line
 end
 
     </code></pre></div>
@@ -520,6 +593,40 @@ feature
 
 invariant
     positive: some_number > 0
+
+end
+
+    </code></pre></div>
+
+
+
+    <h2>Genericity</h2>
+
+    <p>This is a concept that is particularly useful when creating structures like lists. Using genericity we can define classes with generic types that can be specified later. Like this we can use the same class to make a list of strings and to make a list of integers for instance.</p>
+
+    <p>To use this in a class, the we can specify a generic parameter (ex. <b>G</b>) in in square brackets after the class name like so <b>class MY_CLASS [G]</b>. Then when defining an object of this class er must specify which class to use for the generic type like this: <b>my_object: MY_CLASS[ STRING ]</b>. This is a more detailed example of a generic class:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class MY_LIST [G] feature
+
+    first : G
+    last : G
+    extend (new_element: G)
+        do
+            -- Add element to list...
+        end
+
+end
+
+    </code></pre></div>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class SCHOOL feature
+
+    list_of_students : MY_LIST[ STUDENT ]
+    list_of_classes : MY_LIST[ MY_LIST[ STUDENT ] ]
 
 end
 
