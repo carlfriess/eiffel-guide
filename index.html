@@ -156,7 +156,7 @@ end
 
     <h2>Features</h2>
 
-    <p>In Eiffel the Methods and Attributes (Variables) of a class are called features. We can define them by using the key word <b>feature</b> followed by the features name within a class. We specify the features type or return type by using a colon followed by the types name. If a feature is a function and takes arguments we can list them in brackets together with their types. The keyword <b>do</b> is used to denote where the code of the function starts, followed by <b>end</b> at the end.</p>
+    <p>In Eiffel the Methods and Attributes (Variables) of a class are called features. We can define them by using the keyword <b>feature</b> followed by the features name within a class. We specify the features type or return type by using a colon followed by the types name. If a feature is a function and takes arguments we can list them in brackets together with their types. The keyword <b>do</b> is used to denote where the code of the function starts, followed by <b>end</b> at the end.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -322,7 +322,7 @@ feature
 
     <p>As the name would suggest a reference class sets itself apart in that it's attributes are references to other objects, either of classes defined by the developer or built-in classes such as <b>STRING</b> or <b>REAL</b>. As such, an object of a the reference type does not contain any actual values apart from addresses. It only contains references to where the values are stored in the memory. In C or C++ references would be referred to as pointers. An expanded class on the other hand does not contain references, but the actual values. This key difference has an effect on how we create and use classes.</p>
 
-    <p>Another difference, is that when used as an argument, an object of an expanded type is passed by value, while reference types are passed by reference.</p>
+    <p>Another difference, is that when used as an argument, data of an expanded type is passed by value, while data of reference types are passed by reference, since the object consists of addresses.</p>
 
 
 
@@ -375,7 +375,7 @@ create my_object.my_feature("Hello World!")
 
     <p>By default all features defined in a class will be available to clients of the class. To prevent this, we can use <b>{NONE}</b> to keep features internal and inaccessible to clients. The <b>Current</b> keyword is considered a client. Hence, when using <b>{NONE}</b> for a feature, it will not be accessible using <b>Current</b>. This is similar to using private in Java for instance.</p>
 
-    <p>In fact, in Eiffel we can be very specific about which features are available to <i>which</i> clients, by specifying the classes a client must have in order to access the feature. For this we once again use the curly brackets and list all the desired classes like so:</p>
+    <p>In fact, in Eiffel we can be very specific about which features are available to <i>which</i> clients, by specifying the class a client must have in order to access the feature. For this we once again use the curly brackets and list all the desired classes like so:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -442,20 +442,21 @@ end
     <h2>Operators</h2>
 
     <p><b>:=</b> Assignment operator. Ex: <b>meaning_of_life := 42</b></p>
-    <p><b>=</b> Equality operator (== in many other languages). Ex: <b>1 + 2 = 3</b></p>
+    <p><b>=</b> Equality operator (== in many other languages). Ex: <b>1 + 2 = 3</b> would be true</p>
     <p><b>/=</b> Inequality operator (!= in many other languages). Ex: <b>meaning_of_life /= 42</b></p>
     <p><b>&lt;</b>, <b>&gt;</b>, <b>&lt;=</b>, <b>&gt;=</b> Comparison operators.</p>
     <p><b>+</b>, <b>-</b>, <b>*</b>, <b>/</b> Mathematical operators.</p>
     <p><b>//</b> Integer division operator. Ex: <b>5/2=2.5</b> vs <b>5//2=2</b></p>
+    <p><b>\\</b> Modulo. Ex: <b>5\\2=1</b></p>
     <p><b>equal (x, y)</b> To compare strings we can use the equal function.</p>
     <p><b>Current</b> Though not an operator, this always references the currently executing instance of a class.</p>
     <p><b>..</b> Describes an interval. Useful in loops. Ex: <b>1..5</b></p>
 
 
 
-    <h2>If-Else Control Structure</h2>
+    <h2>Control Structures</h2>
 
-    <p>In Eiffel the syntax for an if else loop is as follows (notice, there are no brackets):</p>
+    <p>In Eiffel the syntax for an if else structure is as follows (notice, there are no brackets):</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -483,13 +484,13 @@ end
     
     </code></pre></div>
     
-    <p>Unlike switch statements in other languages, in Eiffel the code following a matching case is not evaluated, as there is no break statement in Eiffel.</p>
+    <p>Unlike switch statements in other languages, in Eiffel the code following a matching case is not evaluated and there is no break statement in Eiffel.</p>
 
 
 
-    <h2>Form-Loop</h2>
+    <h2>Loops</h2>
 
-    <p>This is the typical syntax for a simplified for loop:</p>
+    <p>This is the typical syntax for a simplified from loop (comparable to for loops in other languages):</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -541,7 +542,7 @@ end
 
     <h2>Contracts</h2>
 
-    <p>Contracts are a concept in Eiffel to avoid bugs. Although these should be disabled in a production runtime, during development they can be quite useful. There are three types of assurance elements: preconditions (used in features), postconditions (used in features) and class invariants.</p>
+    <p>Contracts are a concept used in Eiffel to avoid bugs. Although these should be disabled in a production runtime, during development they can be quite useful. There are three types of assurance elements: preconditions (used in features), postconditions (used in features) and class invariants.</p>
 
     <p>Preconditions are defined using the <b>require</b> keyword. They should contain a tag and a boolean expression. Postconditions are written the same way, but we use the <b>ensure</b> keyword. We can use the <b>old</b> notation to compare a variables value to it's value before the feature executed. Here is an example that might be used in the <b>BAKERY</b> class we saw above:</p>
 
@@ -549,16 +550,16 @@ end
 
 number_of_available_cakes : INTEGER
 
-buy_cake (amount : INTEGER)
+buy_cakes (amount : INTEGER)
 
     require
-        positive: amount > 0    -- Check that amount is a positive number
+        positive_amount: amount > 0    -- Check that amount is a positive number
 
     do
         number_of_available_cakes = number_of_available_cakes - amount
 
     ensure
-        reduced: number_of_available_cakes = old number_of_available_cakes - amount
+        amount_reduced: number_of_available_cakes = old number_of_available_cakes - amount
             -- Check that the number of available cakes has decreased correctly
 
     end
@@ -590,7 +591,7 @@ end
 
     <h2>Garbage collection</h2>
 
-    <p>Eiffel uses a garbage collector, which automatically removes any objects from the memory, which are no longer referenced to. So unlike in C or C++ for instance, it is not necessary to perform frees.</p>
+    <p>Eiffel uses a garbage collector which automatically removes any objects from the memory when they are no longer referenced anywhere. So unlike in C or C++ for instance, it is not necessary to manage the memory.</p>
 
 
 
