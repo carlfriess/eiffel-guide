@@ -36,6 +36,18 @@ h2 {
     text-shadow: 0 1px rgba(0, 0, 0, 0.3);
 }
 
+h3 {
+    display: block;
+    margin: 75px auto;
+    margin-bottom: 25px;
+    width: 880px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+    color: #E0E0E0;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+
 .code, .output {
     width: 850px;
     margin: 25px auto;

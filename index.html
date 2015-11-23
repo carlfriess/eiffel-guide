@@ -236,7 +236,7 @@ feature
 
 
 
-    <h2>Reference Classes</h2>
+    <h3>Reference Classes</h3>
 
     <p>When we define an object of a certain class, the computer will allocate memory to hold that class's attributes. However, in the case of a reference class, this allocated memory will only hold the references or addresses to the objects containing the actual values. So by default all attributes of a class will be set to <b>Void</b>, as the objects that the class refers to, do not exist yet. To create these we must always call <b>create</b> before using a new instance.</p>
 
@@ -271,7 +271,7 @@ create my_object.my_feature("Hello World!")
 
 
 
-    <h2>Expanded Classes</h2>
+    <h3>Expanded Classes</h3>
 
     <p>Expanded classes differ from reference classes in that they do not contain references, but rather the actual values of their attributes. For this reason, we do not need to call <b>create</b> before using objects that are instances of the class. All attributes are automatically set to their default initial values when the object is defined.</p>
 
@@ -331,6 +331,32 @@ feature
 end
 
     </code></pre></div>
+
+
+
+    <h2>Aliases</h2>
+
+    <p>When using a custom class to store data, it can be useful to use operators in order to compare objects of that class. For this we must define a feature that performs the comparison and is an alias for an operator. We use the <b>alias</b> keyword after the feature name to choose the operator. In this example, people will be compared according to their age:</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+class
+    PERSON
+
+feature
+    name: STRING
+    age: INTEGER
+
+    older_than alias ">" (other: PERSON) : BOOLEAN
+        do
+            Result := (age > other.age)
+        end
+
+end
+
+    </code></pre></div>
+
+    <p>If we now had an instance of the class called <b>Joe</b> with the age 36 and another called <b>Tom</b> with the age 24, then <b>Joe > Tom</b> is true, while <b>Tom > Joe</b> is false.
 
 
 
