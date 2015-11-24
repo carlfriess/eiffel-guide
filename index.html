@@ -193,6 +193,7 @@ inherit
     SOME_OTHER_CLASS
         redefine
             some_inherited_feature
+        end
 
 feature
     some_feature
@@ -275,7 +276,7 @@ create my_object.my_feature("Hello World!")
 
     <p>Expanded classes differ from reference classes in that they do not contain references, but rather the actual values of their attributes. For this reason, we do not need to call <b>create</b> before using objects that are instances of the class. All attributes are automatically set to their default initial values when the object is defined.</p>
 
-    <p>If <b>a</b> and <b>b</b> are both instances of an expanded class, <b>a = b</b> will copy all of <b>b</b> (including it's values) into <b>a</b> and create a new instance with the same values.</p>
+    <p>If <b>a</b> and <b>b</b> are both instances of an expanded class, <b>a := b</b> will copy all of <b>b</b> (including it's values) into <b>a</b> and create a new instance with the same values.</p>
 
     <p>On the other hand, if <b>a</b> and <b>b</b> are both instances of a reference class, then <b>a = b</b> will copy the reference to the instance of the class represented by <b>b</b> into <b>a</b>. In other words, now <b>a</b> and <b>b</b> will reference the same instance and any change to <b>a</b> will be reflected in <b>b</b>.</p>
 
@@ -413,10 +414,12 @@ inherit
     A
         rename
             f as A_f    -- The feature f inherited from A is now called A_f within C
+        end
 
     B
         undefine
             g           -- The feature g inherited from B is no longer part of C
+        end
 
 feature
     
