@@ -28,7 +28,7 @@ angular.module('sidebar', [])
                 h2 = document.getElementsByTagName("h2");
 
             for (var i = 0; i < h2.length; i++) {
-                html += "<a href=\"\" ng-click=\"sidebarCtrl.scrollTo(" + i + ")\" ng-class=\"{'highlighted':( " + i + " <= sidebarCtrl.highlighted)}\">" + h2.item(i).innerText + "</a>";
+                html += "<a href=\"\" ng-click=\"sidebarCtrl.scrollTo(" + i + ")\" ng-class=\"{'highlighted':( " + i + " <= sidebarCtrl.highlighted)}\">" + h2.item(i).innerHTML + "</a>";
             }
 
             html += "</div></div>";
