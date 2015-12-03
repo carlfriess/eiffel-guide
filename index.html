@@ -178,6 +178,10 @@ feature
 
     </code></pre></div>
 
+    <p>This can be useful for initialisation. A setup feature could implement the initialisation of an object but be called from multiple other features. By using <b>once</b> we can guarantee that it will only perform the initialisation once regardless of who calls it and how many times it is called.</b>
+
+    <p>It is also possible to specify in which context the feature should be considered as called. This is particularly important when using multiple threads or processes. For instance, you may want to execute a feature only once for each Process, once for each Thread or for every object instance. To specify this use the once keys <b>"PROCESS"</b>, <b>"THREAD"</b> and <b>"OBJECT"</b>. These are specified as strings and in brackets after the <b>once</b> keyword like so: <b>once ("PROCESS")</b>. The default once key is <b>"THREAD"</b>.</p>
+
 
 
     <h2>Classes</h2>
