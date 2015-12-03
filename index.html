@@ -518,7 +518,7 @@ end
 
     </code></pre></div>
 
-    <p>It is also possible to add contracts to a from loop. The two options here are to specify a <b>variant</b> expression and an <b>invariant</b> expression. The variant must decrease by 1 after each cycle of the loop, while the variant remains the same. Here is an example:</p>
+    <p>It is also possible to add contracts to a from loop. The two options here are to specify a <b>variant</b> expression and an <b>invariant</b> expression. The variant must decrease by at least 1 after each cycle of the loop, while the invariant remains the same. Here is an example:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -541,11 +541,7 @@ end
 
     <div class="code"><pre><code class="language-eiffel">
 
-across 
-    list_of_customers
-as
-    customer
-loop
+across list_of_customers as customer loop
     Io.put_string (customer.item.name)
     Io.new_line
 end
