@@ -522,6 +522,8 @@ end
 
     </code></pre></div>
 
+    <p>Notice, that in Eiffel loops are evaluated <i>until</i> the conditional becomes true rather than <i>while</i> the conditional is true, which is common in most other languages (Ex. for-loop in C, Java, etc.).</p>
+
     <p>It is also possible to add contracts to a from loop. The two options here are to specify a <b>variant</b> expression and an <b>invariant</b> expression. The variant must decrease by at least 1 after each cycle of the loop, while the invariant remains the same. Here is an example:</p>
 
     <div class="code"><pre><code class="language-eiffel">
@@ -540,6 +542,8 @@ loop
 end
 
     </code></pre></div>
+
+    <p>The contracts in loops are designed to prevent bugs such as endless loops. As such the variant is supposed to be an estimation of the number of iterations.
     
     <p>There also exists an "across"-loop, which goes through an iterable object (such as a list), and creates a cursor. Make sure that the object is in fact iterable. For this all elements must have a feature called <b>next</b> and the iterated object should have the features <b>first</b> and <b>last</b>. The cursor points to the next element of the iterated object at each execution of the loop. Since it is a cursor, you must access the actual elements by using <b>my_cursor.item</b>.</p>
 
