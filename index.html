@@ -465,7 +465,8 @@ end
     <p><b>\\</b> Modulo. Ex: <b>5\\2=1</b></p>
     <p><b>equal (x, y)</b> To compare strings we can use the equal function.</p>
     <p><b>Current</b> Though not an operator, this always references the currently executing instance of a class.</p>
-    <p><b>..</b> Describes an interval. Useful in loops. Ex: <b>1..5</b></p>
+    <p><b>|..|</b> Describes an integer interval. Useful in loops. e.g. <b>1 |..| 5</b></p>
+    <p><b>..</b> Describes an interval of integers or characters in inspect constructions. e.g. <b>a .. z</b></p>
     <p><b>and</b>, <b>or</b>, <b>xor</b>, <b>not</b> Logic operators.</p>
     <p><b>and then</b>, <b>or else</b>, <b>implies</b> Semistrict logic operators (evaluation stops when the result is known).</p>
 
@@ -491,12 +492,14 @@ end
     <div class="code"><pre><code class="language-eiffel">
 
 inspect input_integer
-   when 2 then 
+   when 2 then
         -- Code when input_integer equals 2
-   when 3, 5 then 
+   when 3, 5 then
         -- Code when input_integer equals 3 or 5
-   else 
-        -- Code when input_integer does not equal 2, 3, nor 5
+   when 7..9 then
+        -- Code when input_integer equals 7 or 8 or 9
+   else
+        -- Code when input_integer does not equal 2, 3, 5, 7, 8 nor 9
 end
     
     </code></pre></div>
@@ -556,6 +559,16 @@ end
 
     </code></pre></div>
 
+    <p>For instance, an integer interval is an iterable object.</p>
+
+    <div class="code"><pre><code class="language-eiffel">
+
+across 1 |..| 5 as it loop
+    Io.put_integer (it.item)
+    Io.new_line
+end
+
+    </code></pre></div>
 
 
     <h2>Contracts</h2>
