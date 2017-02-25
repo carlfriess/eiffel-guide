@@ -534,14 +534,14 @@ end
 from
     i := 0
     n := 10
-until
-    i >= 10
-variant
-    n-i
 invariant
     n
+until
+    i >= 10
 loop
     i := i + 1
+variant
+    n-i
 end
 
     </code></pre></div>
