@@ -56,7 +56,7 @@ end
 
     <h2>Naming_conventions</h2>
 
-    <p>In general in Eiffel we use <b>snake_script</b> and not <b>CamelCase</b>.</p>
+    <p>In general, in Eiffel we use <b>snake_script</b> and not <b>CamelCase</b>.</p>
 
     <p><b>CLASSES</b> should be spelled in capital letters.</p>
     <p><b>features</b> (methods and attributes of classes) should be spelled small.</p>
@@ -66,7 +66,7 @@ end
 
     <h2>Features</h2>
 
-    <p>In Eiffel the Methods and Attributes (Variables) of a class are called features. We can define them by using the keyword <b>feature</b> followed by the features name within a class. We specify the features type or return type by using a colon followed by the types name. If a feature is a function and takes arguments we can list them in brackets together with their types. The keyword <b>do</b> is used to denote where the code of the function starts, followed by <b>end</b> at the end.</p>
+    <p>In Eiffel, the Methods and Attributes (Variables) of a class are called features. We can define them by using the keyword <b>feature</b> followed by the features name within a class. We specify the features type or return type by using a colon followed by the types name. If a feature is a function and takes arguments we can list them in brackets together with their types. The keyword <b>do</b> is used to denote where the code of the function starts, followed by <b>end</b> at the end.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -124,7 +124,7 @@ end
 
     <h2>Assigners</h2>
 
-    <p>The variables of a class are read-only to it's clients. To change their values, we can use a setter, a feature that takes the new value as an argument, like in the case of <b>set_age</b> below:</p>
+    <p>The variables of a class are read-only to its clients. To change their values, we can use a setter, a feature that takes the new value as an argument, like in the case of <b>set_age</b> below:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -140,7 +140,7 @@ end
 
     </code></pre></div>
 
-    <p>So a client of the class would not be able to change the age by using <b>Person.age := 21</b>, as <b>Person.age</b> is read-only for clients. Instead it would call <b>Person.set_age(21)</b>. However, if for some reason you're feeling radical and want to use <b>Person.age := 21</b>, you can give age a so called assigner by using the <b>assign</b> keyword and specifying a setter.</p>
+    <p>So, a client of the class would not be able to change the age by using <b>Person.age := 21</b>, as <b>Person.age</b> is read-only for clients. Instead it would call <b>Person.set_age(21)</b>. However, if for some reasons you are feeling radical and want to use <b>Person.age := 21</b>, you can give age a so called assigner by using the <b>assign</b> keyword and specifying a setter.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -156,13 +156,13 @@ end
 
     </code></pre></div>
 
-    <p>Now <b>Person.age := 21</b> is simply a shortcut for <b>Person.set_age(21)</b>.</p>
+    <p>Now, <b>Person.age := 21</b> is simply a shortcut for <b>Person.set_age(21)</b>.</p>
 
 
 
     <h2>Once-executed features</h2>
 
-    <p>Although quite rarely used, in Eiffel a feature can be specified to only execute once then save it's return value and simply return it immediately at every subsequent call. To do this, simply use the <b>once</b> keyword instead of <b>do</b>.</p>
+    <p>Although quite rarely used, in Eiffel a feature can be specified to only be executed once then save its return value and simply return it immediately at every subsequent call. To do this, simply use the <b>once</b> keyword instead of <b>do</b>.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -178,15 +178,15 @@ feature
 
     </code></pre></div>
 
-    <p>This can be useful for initialisation. A setup feature could implement the initialisation of an object but be called from multiple other features. By using <b>once</b> we can guarantee that it will only perform the initialisation once regardless of who calls it and how many times it is called.</b>
+    <p>This can be useful for initialisation. A setup feature could implement the initialisation of an object but be called from multiple other features. By using <b>once</b>, we can guarantee that it will only perform the initialisation once regardless of who calls it and how many times it is called.</b>
 
-    <p>It is also possible to specify in which context the feature should be considered as called. This is particularly important when using multiple threads or processes. For instance, you may want to execute a feature only once for each Process, once for each Thread or for every object instance. To specify this use the once keys <b>"PROCESS"</b>, <b>"THREAD"</b> and <b>"OBJECT"</b>. These are specified as strings and in brackets after the <b>once</b> keyword like so: <b>once ("PROCESS")</b>. The default once key is <b>"THREAD"</b>.</p>
+    <p>It is also possible to specify in which context the feature should be considered as called. This is particularly important when using multiple threads or processes. For instance, you may want to execute a feature only once for each Process, once for each Thread or for every object instance. To specify this, use the once keys <b>"PROCESS"</b>, <b>"THREAD"</b> and <b>"OBJECT"</b>. These are specified as strings and in brackets after the <b>once</b> keyword like so: <b>once ("PROCESS")</b>. The default once key is <b>"THREAD"</b>.</p>
 
 
 
     <h2>Classes</h2>
 
-    <p>The simplest way to define a class in Eiffel is just to name it and give it some features. It may even inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified that should be redefined in this class and not inherited.</p>
+    <p>The simplest way to define a class in Eiffel is just to name it and give it some features. It may even inherit features from other classes. For this we can list all of the desired classes after stating the <b>inherit</b> keyword. Using the <b>redefine</b> keyword features may be specified for classes that should be redefined in this class and not inherited.</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -212,9 +212,9 @@ end
 
     </code></pre></div>
 
-    <p>When redefining a feature, it can be helpful to call it's old version, so within the redefinition, the keyword <b>Precursor</b> is set to the old version and calls can be made like this: <b>Precursor("Some argument")</b>. If you would like to use a version from a specific parent, you can add curly brackets: <b>Precursor { SOME_PARENT } ("Some argument")</b></p>
+    <p>When redefining a feature, it can be helpful to call its old version. So, within the redefinition, the keyword <b>Precursor</b> is set to the old version and calls can be made like this: <b>Precursor("Some argument")</b>. If you would like to use a version from a specific parent, you can add curly brackets: <b>Precursor { SOME_PARENT } ("Some argument")</b></p>
 
-    <p>In the case of <b>MY_CLASS</b> when we want to create an instance of the class, we need to first define the object and specify it's type. Then we use the <b>create</b> keyword to initialise the object, before making other calls to it. A client of the class might look like this:</p>
+    <p>In the case of <b>MY_CLASS</b>, when we want to create an instance of the class, we first need to define the object and specify its type. Then, we use the <b>create</b> keyword to initialise the object, before making other calls to it. A client of the class might look like this:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
@@ -235,7 +235,7 @@ feature
 
     <p>In Eiffel there is a key differentiation between reference and expanded classes. By default a class is of the reference type. To declare a class as expanded, we use the <b>expanded</b> keyword before <b>class</b>.</p>
 
-    <p>As the name would suggest a reference class sets itself apart in that it's attributes are references to other objects, either of classes defined by the developer or built-in classes such as <b>STRING</b> or <b>REAL</b>. As such, an object of a the reference type does not contain any actual values apart from addresses. It only contains references to where the values are stored in the memory. In C or C++ references would be referred to as pointers. An expanded class on the other hand does not contain references, but the actual values. This key difference has an effect on how we create and use classes.</p>
+    <p>As the name would suggest a reference class sets itself apart in that its attributes are references to other objects, either of classes defined by the developer or built-in classes such as <b>STRING</b> or <b>REAL</b>. As such, an object of a the reference type does not contain any actual values apart from addresses. It only contains references to where the values are stored in the memory. In C or C++ references would be referred to as pointers. An expanded class on the other hand does not contain references, but the actual values. This key difference has an effect on how we create and use classes.</p>
 
     <p>Another difference, is that when used as an argument, data of an expanded type is passed by value, while data of reference types are passed by reference, since the object consists of addresses.</p>
 
@@ -280,7 +280,7 @@ create my_object.my_feature("Hello World!")
 
     <p>Expanded classes differ from reference classes in that they do not contain references, but rather the actual values of their attributes. For this reason, we do not need to call <b>create</b> before using objects that are instances of the class. All attributes are automatically set to their default initial values when the object is defined.</p>
 
-    <p>If <b>a</b> and <b>b</b> are both instances of an expanded class, <b>a := b</b> will copy all of <b>b</b> (including it's values) into <b>a</b> and create a new instance with the same values.</p>
+    <p>If <b>a</b> and <b>b</b> are both instances of an expanded class, <b>a := b</b> will copy all of <b>b</b> (including its values) into <b>a</b> and create a new instance with the same values.</p>
 
     <p>On the other hand, if <b>a</b> and <b>b</b> are both instances of a reference class, then <b>a = b</b> will copy the reference to the instance of the class represented by <b>b</b> into <b>a</b>. In other words, now <b>a</b> and <b>b</b> will reference the same instance and any change to <b>a</b> will be reflected in <b>b</b>.</p>
 
@@ -575,7 +575,7 @@ end
 
     <p>Contracts are a concept used in Eiffel to avoid bugs. Although these should be disabled in a production runtime, during development they can be quite useful. There are three types of assurance elements: preconditions (used in features), postconditions (used in features) and class invariants.</p>
 
-    <p>Preconditions are defined using the <b>require</b> keyword. They should contain a tag and a boolean expression. Postconditions are written the same way, but we use the <b>ensure</b> keyword. We can use the <b>old</b> notation to compare a variables value to it's value before the feature executed. Here is an example that might be used in the <b>BAKERY</b> class we saw above:</p>
+    <p>Preconditions are defined using the <b>require</b> keyword. They should contain a tag and a boolean expression. Postconditions are written the same way, but we use the <b>ensure</b> keyword. We can use the <b>old</b> notation to compare a variables value to its value before the feature is executed. Here is an example that might be used in the <b>BAKERY</b> class we saw above:</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
