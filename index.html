@@ -61,7 +61,7 @@ end
     <p><b>CLASSES</b> should be spelled in capital letters.</p>
     <p><b>features</b> (methods and attributes of classes) should be spelled small.</p>
     <p><b>Objects</b> (instances of a class) should be capitalised.</p>
-    
+
 
 
     <h2>Features</h2>
@@ -74,7 +74,7 @@ class
     BAKERY
 
 feature
-    
+
     number_of_cakes : INTEGER
         -- A variable containing an integer
 
@@ -89,7 +89,7 @@ feature
             -- Some code here...
         end
 
-    is_cake_available : BOOLEAN   -- A function returning true or false 
+    is_cake_available : BOOLEAN   -- A function returning true or false
         do
             Result := number_of_cakes > 0
         end
@@ -426,7 +426,7 @@ inherit
         end
 
 feature
-    
+
     ...
 
 end
@@ -474,19 +474,22 @@ end
 
     <h2>Control Structures</h2>
 
-    <p>In Eiffel the syntax for an if else structure is as follows (notice, there are no brackets):</p>
+    <p>In Eiffel the syntax for an if/elseif/else structure is as follows (notice: there are no brackets, and no <b>then</b> following the <b>else</b>):</p>
 
     <div class="code"><pre><code class="language-eiffel">
 
 if meaning_of_life = 42
 then
     -- code if true
+elseif meaning_of_life = 43
+then
+    -- code if only second condition is true
 else
-    -- code if false
+    -- code if all previous conditions are false
 end
 
     </code></pre></div>
-    
+
     <p>Eiffel also provides switch-like Statements called <b>inspect</b>, where a variable is compared to various values. The else condition is the default condition that applies when no case matches the input.</p>
 
     <div class="code"><pre><code class="language-eiffel">
@@ -501,9 +504,9 @@ inspect input_integer
    else
         -- Code when input_integer does not equal 2, 3, 5, 7, 8 nor 9
 end
-    
+
     </code></pre></div>
-    
+
     <p>Unlike switch statements in other languages, in Eiffel the code following a matching case is not evaluated and there is no break statement in Eiffel.</p>
 
 
@@ -547,7 +550,7 @@ end
     </code></pre></div>
 
     <p>The contracts in loops are designed to prevent bugs such as endless loops. As such the variant is supposed to be an estimation of the number of iterations.
-    
+
     <p>There also exists an "across"-loop, which goes through an iterable object (such as a list), and creates a cursor. Make sure that the object is in fact iterable. For this all elements must have a feature called <b>next</b> and the iterated object should have the features <b>first</b> and <b>last</b>. The cursor points to the next element of the iterated object at each execution of the loop. Since it is a cursor, you must access the actual elements by using <b>my_cursor.item</b>.</p>
 
     <div class="code"><pre><code class="language-eiffel">
@@ -677,7 +680,7 @@ feature
             create button.set_click_handler( agent click_event )
             button.click
         end
-        
+
     click_event
         do
             Io.put_string ("The button was clicked!")
@@ -691,19 +694,19 @@ end
 
 class
     BUTTON
-    
+
 create
     set_click_handler
-    
+
 feature
 
     click_handler : PROCEDURE [APPLICATION, TUPLE[]]
-    
+
     set_click_handler ( handler: PROCEDURE [APPLICATION, TUPLE[]] )
         do
             click_handler := handler
         end
-        
+
     click
         do
             click_handler.call
